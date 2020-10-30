@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    // SerializeField allows to to keep my elements private but still access them in
+    // the Unity Editor.
+    [SerializeField] float movementSpeed = 10f;
+
     /*
      * In Unity we will be using two type of methods; the Built-in methods and the User-Defined methods
      * 
@@ -32,10 +36,11 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      //  print("The Update built-in method is being called!");
+        //  print("The Update built-in method is being called!");
+        Move();
     }
 
-    void Move()
+    void Move()// method definition
     {
         /* format of calling a method with a return
          * variableToStoreReturn = methodCall();
@@ -44,6 +49,32 @@ public class Player : MonoBehaviour
          * ClassName.MethodName();
          */
 
-        var deltaX = Input.GetAxis("Horizontal");
+        var deltaX = Input.GetAxis("Horizontal") * Time.deltaTime * movementSpeed; 
+        // any method which returns a value should be assigned to a variable so that the value is stored and not lost.
+        
+        /* deltaTime is a property which returns the time taken for the previous frame to execute.
+         * Since different devices have different frame rates, to make the game frame INDEPENDANT, we are
+         * multiplying the distance generated (depending on the amount of frames) with the frame duration
+         * and thus, cancelling out the frame rate value.
+         */
+
+
+        /*
+         * The GetAxis() method will search from the axis passed as a parameter, and will check what user
+         * controls are set e.g. arrow keys and keyboard keys. If the user, presses on any of these keys
+         * a value to represent the movement/control is returned.
+         */
+
+        /* To change a setting/property for our object, from the code, we need to use the format
+         * object.component.property
+         * If the script is controlling the object we need, we can ignore the object in the syntax and use
+         * component.property
+         */
+
+        //calculating the new x coordinate by fetching the current x and adding/deducting the value of deltaX
+        var newXPos = transform.position.x + deltaX;
+
+        //calling the Player's position property:
+        transform.position = new Vector3(newXPos, transform.position.y, transform.position.z);
     }
 }
