@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -7,6 +8,12 @@ public class Player : MonoBehaviour
     // SerializeField allows to to keep my elements private but still access them in
     // the Unity Editor.
     [SerializeField] float movementSpeed = 10f;
+    float padding = 0.5f;
+
+    float xMin;
+    float xMax;
+    float yMin;
+    float yMax;
 
     /*
      * In Unity we will be using two type of methods; the Built-in methods and the User-Defined methods
@@ -30,7 +37,8 @@ public class Player : MonoBehaviour
      * parameters and curly brackets to hold the different statements.
      */
     {
-       // print("The Start built-in method has been called!");
+        // print("The Start built-in method has been called!");
+        SetUpMoveBoundaries();
     }
 
     // Update is called once per frame
@@ -49,9 +57,9 @@ public class Player : MonoBehaviour
          * ClassName.MethodName();
          */
 
-        var deltaX = Input.GetAxis("Horizontal") * Time.deltaTime * movementSpeed; 
+        var deltaX = Input.GetAxis("Horizontal") * Time.deltaTime * movementSpeed;
         // any method which returns a value should be assigned to a variable so that the value is stored and not lost.
-        
+
         /* deltaTime is a property which returns the time taken for the previous frame to execute.
          * Since different devices have different frame rates, to make the game frame INDEPENDANT, we are
          * multiplying the distance generated (depending on the amount of frames) with the frame duration
@@ -72,9 +80,30 @@ public class Player : MonoBehaviour
          */
 
         //calculating the new x coordinate by fetching the current x and adding/deducting the value of deltaX
-        var newXPos = transform.position.x + deltaX;
+        var newXPos = Mathf.Clamp(transform.position.x + deltaX, xMin, xMax);
+
+        var deltaY = Input.GetAxis("Vertical") * Time.deltaTime * movementSpeed;
+        var newYPos = Mathf.Clamp(transform.position.y + deltaY, yMin, yMax);
 
         //calling the Player's position property:
-        transform.position = new Vector3(newXPos, transform.position.y, transform.position.z);
+        transform.position = new Vector3(newXPos, newYPos, transform.position.z);
+    }
+
+    void SetUpMoveBoundaries()
+    {
+        Camera gameCamera = Camera.main;
+
+        /*
+         * ViewportportToWorldPoint looks at the current view of the camera and sets the boundaries
+         * between 0 and 1 at runtime. Thus, if we change the camera size, the new boundaries are recalculated
+         * with the same values of min 0 and max 1.
+         * Currently they have specific values and if we use these we need to change them everytime the
+         * camera is changed.
+         */
+
+        xMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x + padding;
+        xMax = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x - padding;
+        yMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + padding;
+        yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - padding;
     }
 }
