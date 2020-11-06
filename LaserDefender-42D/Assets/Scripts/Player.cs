@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     // SerializeField allows to to keep my elements private but still access them in
     // the Unity Editor.
     [SerializeField] float movementSpeed = 10f;
+    [SerializeField] GameObject laserPrefab;
+
     float padding = 0.5f;
 
     float xMin;
@@ -46,6 +48,7 @@ public class Player : MonoBehaviour
     {
         //  print("The Update built-in method is being called!");
         Move();
+        Fire();
     }
 
     void Move()// method definition
@@ -105,5 +108,26 @@ public class Player : MonoBehaviour
         xMax = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x - padding;
         yMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + padding;
         yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - padding;
+    }
+
+    void Fire()
+    {
+        /*
+         * GetButtonDown returns true as soon as the user presses down on the specified
+         * button. In our settings Fire1 represents the left mouse button click (mouse 0)
+         * The method is executed ONLY once as soon as the button is pressed. To keep
+         * executing, the user needs to keep tapping on the button.
+         */
+
+        if (Input.GetButtonDown("Fire1")) // if(Input.GetButtonDown("Fire1")) == true)
+        {
+            /* The Instantiate method creates (and returns) a clone from the object passed as the 
+             * first parameter. The position passed as the 2nd parameter will indicate where
+             * the clone needs to be placed in the scene.
+             * Quaternion.identity represents no rotation given to the object.
+             */
+
+            Instantiate(laserPrefab, this.transform.position, Quaternion.identity);
+        }
     }
 }
