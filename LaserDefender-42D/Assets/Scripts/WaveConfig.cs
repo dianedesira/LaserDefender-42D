@@ -46,9 +46,28 @@ public class WaveConfig : ScriptableObject
     {
         return enemyPrefab;
     }
-    public GameObject GetPathPrefab()
+    /*public GameObject GetPathPrefab()
     {
         return pathPrefab;
+    }*/
+    public List<Transform> GetWaypoints()
+    {
+        List<Transform> waveWayPoints = new List<Transform>();
+
+        //foreach item (indicate type of item and a temporarily name to refer to each item
+        // in the collection) in the collection
+
+        foreach (Transform child in pathPrefab.transform)
+        {
+            /* pathPrefab is a parent which holds all of the different waypoints (to form
+             * the path). Instead of linking each point to a list ourselves, we can use
+             * a foreach so that automatically all of the pathprefab's children are added
+             * to the list (thus, we don't need to add them one by one).
+             */
+            waveWayPoints.Add(child);
+        }
+
+        return waveWayPoints;
     }
     public float GetTimeBetweenSpawns()
     {

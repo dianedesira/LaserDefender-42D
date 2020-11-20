@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemyPathing : MonoBehaviour
 {
+    //reference to the asset item in the project panel which is of type WaveConfig/
+    //Enemy Wave Config
+    [SerializeField] WaveConfig waveConfig;
+
     [SerializeField] List<Transform> waypoints;
     [SerializeField] float moveSpeed = 2f;
 
@@ -12,6 +16,9 @@ public class EnemyPathing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        waypoints = waveConfig.GetWaypoints(); //fetch the method GetWaypoints() from our
+        //current wave (type WaveConfig) to retrieve all of the points found in the current
+        // linked path
         transform.position = waypoints[wayPointIndex].position;
     }
 

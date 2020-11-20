@@ -32,6 +32,13 @@ public class Shredder : MonoBehaviour
         Destroy(collision.gameObject);
         // The Destroy() method destroys the gameObject which is passed as a parameter from
         // the hierarchy
+
+       // print("Trigger Collider Hit!");
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        print("Collision Collider Hit!");
     }
 
 }
