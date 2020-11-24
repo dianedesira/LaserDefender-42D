@@ -96,3 +96,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 10
+  projectileSpeed: 20
+  projectileFiringTime: 0.3
+  laserPrefab: {fileID: 0}

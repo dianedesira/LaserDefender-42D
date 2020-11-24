@@ -6,10 +6,9 @@ public class EnemyPathing : MonoBehaviour
 {
     //reference to the asset item in the project panel which is of type WaveConfig/
     //Enemy Wave Config
-    [SerializeField] WaveConfig waveConfig;
+    WaveConfig waveConfig;
 
-    [SerializeField] List<Transform> waypoints;
-    [SerializeField] float moveSpeed = 2f;
+    List<Transform> waypoints;
 
     int wayPointIndex = 0;
     
@@ -37,8 +36,8 @@ public class EnemyPathing : MonoBehaviour
         {
             var targetPosition = waypoints[wayPointIndex].transform.position;
 
-            var movementThisFrame = moveSpeed * Time.deltaTime; // making the enemy
-            // movement frame independent (moving at the same speed on every PC).
+            var movementThisFrame = waveConfig.GetEnemyMoveSpeed() * Time.deltaTime; 
+            //making the enemy movement frame independent (moving at the same speed on every PC).
 
             /*
              * MoveTowards is a method found in the Vector2 class. This method returns
@@ -63,5 +62,20 @@ public class EnemyPathing : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    /* The particular wave to set the current waveConfig can only be retrieved from outside the
+     * script (in this case, from the EnemySpawner since this is the script which will know the
+     * group in which the current enemy is in)
+     */
+    public void SetWaveConfig(WaveConfig waveConfigToSet)
+    {
+        /* waveConfig is the global variable for this particular enemy and when an enemy clone
+         * is generated, this method (SetWaveConfig()) will be called to indicated in which 
+         * wave/group it is in. This is important since depending on the wave it is in, the path
+         * will be different. This way, the enemypathing script can work with the proper path
+         * for the current wave.
+         */
+        waveConfig = waveConfigToSet;
     }
 }
