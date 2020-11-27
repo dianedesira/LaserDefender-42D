@@ -6,18 +6,20 @@ public class EnemySpawner : MonoBehaviour
 {
     //a list of WaveConfigs - multiple waves which represent different enemy groups
     [SerializeField] List<WaveConfig> waveConfigs;
-
+    [SerializeField] bool looping = false;
     //variable to keep track of current wave/group which we are working with
     int startingWave = 0; // first item always in position 0 of a list
 
     // Start is called before the first frame update
-    void Start()
+    IEnumerator Start() // We have changed the built-in Start method to be a coroutine as well
     {
-        //The first wave which will be generated will be the one in position 0 in the
-        //waveConfigs list
-        WaveConfig currentWave = waveConfigs[startingWave];
+        do
+        {
+            //coroutine to spawn all waves in the list
+            yield return StartCoroutine(SpawnAllWaves());
 
-        StartCoroutine(SpawnAllEnemiesInWave(currentWave));
+        } while (looping); // keep on repeating spawning all waves while the looping condition is set
+        //to true.
     }
 
     // Update is called once per frame
@@ -62,6 +64,19 @@ public class EnemySpawner : MonoBehaviour
             newEnemyClone.GetComponent<EnemyPathing>().SetWaveConfig(waveConfig);
 
             yield return new WaitForSeconds(waveConfig.GetTimeBetweenSpawns());
+        }
+    }
+
+    IEnumerator SpawnAllWaves()
+    {
+        for (int waveIndex = startingWave; waveIndex < waveConfigs.Count; waveIndex++)
+        {
+            WaveConfig currentWave = waveConfigs[waveIndex];
+            /* The iteration will pause until the current coroutine for SpawnAllEnemiesInWave finishes
+             * and continues iterating after so that the next coroutine with the next wave will be
+             * executed.
+             */
+            yield return StartCoroutine(SpawnAllEnemiesInWave(currentWave));
         }
     }
 }
