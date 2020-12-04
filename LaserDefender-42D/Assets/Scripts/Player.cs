@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject laserPrefab;
     Coroutine fireRoutine;
 
+    [SerializeField] float health = 100;
+
 
     float padding = 0.5f;
 
@@ -179,5 +181,33 @@ public class Player : MonoBehaviour
              */
             yield return new WaitForSeconds(projectileFiringTime);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        /* The damage that needs to be applied to the enemy's health is found in the DamageDealer script and
+         * this script is attached to the player laser clone.
+         * Thus, to fetch the method from the script we need to use the syntax of object.component.element
+         * the laser clone is the other object part of the collision thus, collision.gameObject
+         * GetComponent<DamageDealer>() retrieves the script component and from the component we call the
+         * method.
+         */
+        DamageDealer damageDealer = collision.gameObject.GetComponent<DamageDealer>();
+
+        if (!damageDealer)
+            return;
+
+        ProcessHit(damageDealer);
+    }
+
+    private void ProcessHit(DamageDealer damageDealer)
+    {
+        health -= damageDealer.GetDamage(); // health = health - damageDealer.GetDamage();
+        // A -= B; => A = A - B;
+        damageDealer.Hit();
+        // health -= collision.gameObject.GetComponent<DamageDealer>().GetDamage();
+
+        if (health <= 0)
+            Destroy(gameObject);
     }
 }

@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     }
 
     /* The OnTriggerEnter2D built-in method is used since one of the colliders which are part of the collision
-     * (enemy and player laser) has a trigger collider.
+     * (enemy and player laser) has a trigger collider (the is trigger option is ticked).
      */
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -42,6 +42,18 @@ public class Enemy : MonoBehaviour
          */
         DamageDealer damageDealer = collision.gameObject.GetComponent<DamageDealer>();
 
+        /* If the other object, which is part of the collision, doesn't contain a damage dealer
+         * component, set the method to return back and finish execution so that the 
+         * ProcessHit() method is NOT executed.
+         * the ! (not) operator is normally used to check for a false value. When this is checked
+         * with variables which are not boolean, it automatically checks whether the variable is
+         * empty/null.
+         * A return in a normal method, always indicates the termination of the method. Any code
+         * following the return will not be executed.
+         */
+        if (!damageDealer)
+            return;
+
         ProcessHit(damageDealer);
     }
 
@@ -49,7 +61,7 @@ public class Enemy : MonoBehaviour
     {
         health -= damageDealer.GetDamage(); // health = health - damageDealer.GetDamage();
         // A -= B; => A = A - B;
-
+        damageDealer.Hit();
         // health -= collision.gameObject.GetComponent<DamageDealer>().GetDamage();
 
         if (health <= 0)
