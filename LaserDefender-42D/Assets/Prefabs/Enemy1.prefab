@@ -115,6 +115,11 @@ MonoBehaviour:
   maxTimeBetweenShots: 3
   enemyLaserPrefab: {fileID: 816090408383384286, guid: d44f740342dc60f47a91a44e1d5b30e5, type: 3}
   enemyLaserSpeed: 20
+  deathVFX: {fileID: 5260549472599011536, guid: efaa1b03f160d104b9661bd590671644, type: 3}
+  enemyDeathSound: {fileID: 8300000, guid: 63d42b7b25fb67a41bd741b8d6da7f57, type: 3}
+  enemyDeathSoundVolume: 0.75
+  shootSound: {fileID: 8300000, guid: ea1c7ee8b93a22949b6f647fa92fca86, type: 3}
+  shootSoundVolume: 0.25
 --- !u!60 &8943306846543312597
 PolygonCollider2D:
   m_ObjectHideFlags: 0

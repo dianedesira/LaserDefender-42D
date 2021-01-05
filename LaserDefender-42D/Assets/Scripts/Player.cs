@@ -16,6 +16,11 @@ public class Player : MonoBehaviour
 
     [SerializeField] float health = 100;
 
+    [SerializeField] AudioClip playerDeathSound;
+    [SerializeField] [Range(0, 1)] float playerDeathSoundVolume = 0.75f;
+    [SerializeField] AudioClip shootSound;
+    [SerializeField] [Range(0, 1)] float shootSoundVolume = 0.1f;
+
 
     float padding = 0.5f;
 
@@ -166,6 +171,8 @@ public class Player : MonoBehaviour
             // the velocity property is part of the rigidbody2D component
             laserClone.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
 
+            AudioSource.PlayClipAtPoint(shootSound, Camera.main.transform.position, shootSoundVolume);
+
             /*We are using coroutines so that we create a short delay between the generation
              * of one laser and another (since we are in an infinite loop). The advantage
              * of using coroutines, is that during the delay, the method process will return
@@ -208,6 +215,13 @@ public class Player : MonoBehaviour
         // health -= collision.gameObject.GetComponent<DamageDealer>().GetDamage();
 
         if (health <= 0)
-            Destroy(gameObject);
+            Die();
+    }
+
+    private void Die()
+    {
+        AudioSource.PlayClipAtPoint(playerDeathSound, Camera.main.transform.position, playerDeathSoundVolume);
+
+        Destroy(gameObject);
     }
 }

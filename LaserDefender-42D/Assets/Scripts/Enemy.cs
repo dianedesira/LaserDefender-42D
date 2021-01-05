@@ -14,6 +14,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] GameObject enemyLaserPrefab;
     [SerializeField] float enemyLaserSpeed = 20f;
 
+    [SerializeField] GameObject deathVFX;
+
+    [SerializeField] AudioClip enemyDeathSound;
+    [SerializeField] [Range(0, 1)] float enemyDeathSoundVolume = 0.75f; // range is used to create a bar
+    // for dragging to assign the volume sound min 0 and max 1
+    [SerializeField] AudioClip shootSound;
+    [SerializeField] [Range(0, 1)] float shootSoundVolume = 0.25f;
 
     // Start is called before the first frame update
     void Start()
@@ -65,7 +72,19 @@ public class Enemy : MonoBehaviour
         // health -= collision.gameObject.GetComponent<DamageDealer>().GetDamage();
 
         if (health <= 0)
-            Destroy(gameObject);
+            Die();
+    }
+
+    private void Die()
+    {
+        AudioSource.PlayClipAtPoint(enemyDeathSound, Camera.main.transform.position, enemyDeathSoundVolume);
+
+        //create the explosion effect clone. We are saving a reference to the clone so that it can be destroyed.
+        GameObject explosion = Instantiate(deathVFX, transform.position, Quaternion.identity);
+
+        Destroy(explosion, 1f);
+
+        Destroy(gameObject);
     }
 
     void CountDownAndShoot()
@@ -91,5 +110,7 @@ public class Enemy : MonoBehaviour
 
         enemyLaserClone.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -enemyLaserSpeed);
         //enemyLaserSpeed needs to be negative to shoot downwards, otherwise it will shoot upwards.
+
+        AudioSource.PlayClipAtPoint(shootSound, Camera.main.transform.position, shootSoundVolume);
     }
 }
