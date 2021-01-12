@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Level : MonoBehaviour
 {
+    [SerializeField] float delayInSeconds = 2f;
+
     public void LoadStartMenu()
     {
         /* LoadScene is found in the SceneManager class (which is found in the SceneManagement library - this
@@ -24,11 +26,24 @@ public class Level : MonoBehaviour
 
     public void LoadGameOver()
     {
-        SceneManager.LoadScene("GameOver");
+        StartCoroutine(WaitAndLoad());
     }
 
     public void QuitGame()
     {
+        print("quitting game...");
         Application.Quit();
+    }
+
+    IEnumerator WaitAndLoad()
+    {
+        /* So as not to immediately load the Game Over scene, when the player dies, a delay will be used so 
+         * that the user will realise that the player has now died.
+         * As soon as the compiler enters this method, it needs to return back and come back after the delay is
+         * over so that the Game over scene can be loaded.
+         */
+        yield return new WaitForSeconds(delayInSeconds);
+
+        SceneManager.LoadScene("GameOver");
     }
 }

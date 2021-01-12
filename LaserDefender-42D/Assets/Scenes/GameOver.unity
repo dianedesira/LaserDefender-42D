@@ -132,7 +132,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2454522031612714, guid: d4b174eb101e63c4d842d2467859fd0e, type: 3}
       propertyPath: m_Name
-      value: StartMenuCanvas
+      value: GameOverCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 2454522031612725, guid: d4b174eb101e63c4d842d2467859fd0e, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 339761890}
   - component: {fileID: 339761889}
   m_Layer: 5
-  m_Name: Start Button
+  m_Name: Play Again Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -408,7 +408,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start
+  m_text: Play Again
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: be8c368b684066a478b81ef65ac0c829, type: 2}
   m_sharedMaterial: {fileID: -6823393969994516368, guid: be8c368b684066a478b81ef65ac0c829, type: 2}
@@ -435,8 +435,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 65
+  m_fontSizeBase: 65
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -542,7 +542,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Laser Defender
+  m_text: Game Over
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: be8c368b684066a478b81ef65ac0c829, type: 2}
   m_sharedMaterial: {fileID: -6823393969994516368, guid: be8c368b684066a478b81ef65ac0c829, type: 2}
@@ -569,8 +569,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 65
-  m_fontSizeBase: 65
+  m_fontSize: 85
+  m_fontSizeBase: 85
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -632,7 +632,7 @@ GameObject:
   - component: {fileID: 604484978}
   - component: {fileID: 604484977}
   m_Layer: 5
-  m_Name: Quit Button
+  m_Name: Main Menu Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -702,7 +702,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 705923234}
         m_TargetAssemblyTypeName: Level, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: LoadStartMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -732,7 +732,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: be8c368b684066a478b81ef65ac0c829, type: 2}
   m_sharedMaterial: {fileID: -6823393969994516368, guid: be8c368b684066a478b81ef65ac0c829, type: 2}
@@ -866,6 +866,63 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 60afd8d7185757147aeb393f41ef97f2, type: 3}
+--- !u!1001 &642918487
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7620410069653531167, guid: ac853750b8eaca9449cb95b16b93f442, type: 3}
+      propertyPath: m_Name
+      value: Music Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027110599693659419, guid: ac853750b8eaca9449cb95b16b93f442, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027110599693659419, guid: ac853750b8eaca9449cb95b16b93f442, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027110599693659419, guid: ac853750b8eaca9449cb95b16b93f442, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027110599693659419, guid: ac853750b8eaca9449cb95b16b93f442, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027110599693659419, guid: ac853750b8eaca9449cb95b16b93f442, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027110599693659419, guid: ac853750b8eaca9449cb95b16b93f442, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027110599693659419, guid: ac853750b8eaca9449cb95b16b93f442, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027110599693659419, guid: ac853750b8eaca9449cb95b16b93f442, type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027110599693659419, guid: ac853750b8eaca9449cb95b16b93f442, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027110599693659419, guid: ac853750b8eaca9449cb95b16b93f442, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8027110599693659419, guid: ac853750b8eaca9449cb95b16b93f442, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ac853750b8eaca9449cb95b16b93f442, type: 3}
 --- !u!1001 &705923233
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1082,8 +1139,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.0000076293945, y: 504.1}
-  m_SizeDelta: {x: 683.7372, y: 118.9321}
+  m_AnchoredPosition: {x: 34.1, y: 417.7}
+  m_SizeDelta: {x: 947.65967, y: 291.6609}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1798750347
 MonoBehaviour:
@@ -1105,7 +1162,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: may the force be with you
+  m_text: Vincere non e' importante... E' l'unica cosa che conta!!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c215cac920de9ed4ebcf5ce06c2054f4, type: 2}
   m_sharedMaterial: {fileID: 8309641413229698781, guid: c215cac920de9ed4ebcf5ce06c2054f4, type: 2}

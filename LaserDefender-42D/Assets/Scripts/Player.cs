@@ -222,6 +222,13 @@ public class Player : MonoBehaviour
     {
         AudioSource.PlayClipAtPoint(playerDeathSound, Camera.main.transform.position, playerDeathSoundVolume);
 
+        /* Instead of linking to objects via drag and drop we can do so via code. The FindObjectOfType() method
+         * retrieves an object, in the current hierarchy, which contains the script indicated between <>.
+         * In this example, the compiler will return the object in the current hierarchy which contains the 
+         * Level script. We can then retrieve any properties or methods from this class.
+         */
+        FindObjectOfType<Level>().LoadGameOver();
+
         Destroy(gameObject);
     }
 }
