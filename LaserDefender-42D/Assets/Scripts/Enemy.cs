@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+   [Header("Enemy Stats")]
     [SerializeField] float health = 100;
+    [SerializeField] int scoreValue = 50;
+
+   [Header("Shooting")]
     [SerializeField] float shotCounter; //holding the random time before the next laser shot
     [SerializeField] float minTimeBetweenShots = 0.2f;//possible shortest time between one laser shot and 
     //another
     [SerializeField] float maxTimeBetweenShots = 3f;//possible longest time between one laser shot and 
     //another
-
     [SerializeField] GameObject enemyLaserPrefab;
     [SerializeField] float enemyLaserSpeed = 20f;
 
+   [Header("Effects")]
     [SerializeField] GameObject deathVFX;
-
     [SerializeField] AudioClip enemyDeathSound;
     [SerializeField] [Range(0, 1)] float enemyDeathSoundVolume = 0.75f; // range is used to create a bar
     // for dragging to assign the volume sound min 0 and max 1
@@ -77,6 +80,8 @@ public class Enemy : MonoBehaviour
 
     private void Die()
     {
+        FindObjectOfType<GameSession>().AddToScore(scoreValue);
+
         AudioSource.PlayClipAtPoint(enemyDeathSound, Camera.main.transform.position, enemyDeathSoundVolume);
 
         //create the explosion effect clone. We are saving a reference to the clone so that it can be destroyed.

@@ -20,6 +20,8 @@ public class Level : MonoBehaviour
 
     public void LoadGame()
     {
+        FindObjectOfType<GameSession>().ResetGame();
+
         //IMP the name should be exactly as the scene is named in the editor
         SceneManager.LoadScene("LaserDefender");
     }
