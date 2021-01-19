@@ -14,7 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject laserPrefab;
     Coroutine fireRoutine;
 
-    [SerializeField] float health = 100;
+    [SerializeField] int health = 500;
 
     [SerializeField] AudioClip playerDeathSound;
     [SerializeField] [Range(0, 1)] float playerDeathSoundVolume = 0.75f;
@@ -230,5 +230,10 @@ public class Player : MonoBehaviour
         FindObjectOfType<Level>().LoadGameOver();
 
         Destroy(gameObject);
+    }
+
+    public int GetHealth()
+    {
+        return health;
     }
 }

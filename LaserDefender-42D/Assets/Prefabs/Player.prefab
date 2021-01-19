@@ -100,7 +100,7 @@ MonoBehaviour:
   projectileSpeed: 20
   projectileFiringTime: 0.3
   laserPrefab: {fileID: 3835169178072292358, guid: 0db76b0dd9b8184428b11f3effab274c, type: 3}
-  health: 100
+  health: 500
   playerDeathSound: {fileID: 8300000, guid: 96ce787d644cc0449b7a536fa54bc6d1, type: 3}
   playerDeathSoundVolume: 0.75
   shootSound: {fileID: 8300000, guid: dbd2ed3c9ef60e448b12793c19601baa, type: 3}
